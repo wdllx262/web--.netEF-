@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+    lab6_2.Areas.admin.Models.Product item = ViewBag.item;
+}
+
+<section class="wrapper">
+    <h3>
+        <i class="fa fa-angle-right"></i>
+        <a href="/admin/product/list">商品管理</a>/<a href="/admin/product/Edit">编辑</a>
+    </h3>
+    <!-- BASIC FORM ELELEMNTS -->
+    <div class="row mt">
+        <div class="col-lg-12">
+            <div class="form-panel">
+                <h4 class="mb">
+                    <i class="fa fa-angle-right"></i>
+
+                    商品编辑
+                </h4>
+                <form class="form-horizontal style-form" action="/admin/Shop/EditSave" method="post" enctype="multipart/form-data">
+                    <input type="hidden" value="@item.Id" name="ProductId" >
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">产品名称</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" type="text" value="@item.Name" name="ProductName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">产品图片</label>
+                        <div class="col-sm-10">
+                            <img src="/upload/@item.Pic" style="width:50px;height:50px;">
+                            <input class="form-control" type="file" value="" name="pic" >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">产品价格</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" type="text" name="Price" value="@item.Price">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">产品库存</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" type="text" name="Amount" value="@item.StockNum">
+                        </div>
+                    </div>
+                    <div>
+                        <input type="submit" class="btn btn-primary" value="保存" />
+                    </div>
+                </form>
+            </div>
+        </div><!-- col-lg-12-->
+    </div><!-- /row -->
+
+</section><! --/wrapper -->
+

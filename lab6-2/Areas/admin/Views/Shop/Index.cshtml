@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+    List<lab6_2.Areas.admin.Models.Product>  lst =ViewBag.lst;
+    String search = ViewBag.search;
+}
+
+<section class="wrapper">
+    <h3><i class="fa fa-angle-right"></i> <a href="/admin/Shop/Index">商品管理/列表</a></h3>
+    <div class="row">
+        
+        <div class="col-md-12">
+            <div class="content-panel">
+                <h4><i class="fa fa-angle-right"></i> 商品列表</h4>
+                <form action="/admin/Shop/Index">
+                    <input type="text" name="search" value="@search">
+                    <input type="submit" class="btn btn-primary">
+                </form>
+                <hr>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th><a href="/admin/Shop/Index?order=Id&search=@search">产品编号</a></th>
+                            <th><a href="/admin/Shop/Index?order=Name&search=@search">产品名称</a></th>
+                            <th>产品图片</th>
+                            <th><a href="/admin/Shop/Index?order=Price&search=@search">产品价格</a></th>
+                            <th><a href="/admin/Shop/Index?order=Stocknum&search=@search">产品库存</a></th>
+                            <th>用户操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            @{
+                                foreach (lab6_2.Areas.admin.Models.Product item in lst)
+                                {
+                                    <tr>
+                                        <td>@item.Id</td>
+                                        <td>@item.Name</td>
+                                        <td><a href="/upload/@item.Pic" >
+                                            <div class="media-left" >
+                                                <img class="media-object" src="/upload/@item.Pic" alt="@item.Name" style="width:50px;height:50px;">
+                                            </div>
+                                            </a>
+                                        </td>
+                                        <td>¥@item.Price</td>
+                                        <td>>@item.StockNum</td>
+                                        <td><a href="javascript:del(@item.Id)" class="btn btn-primary">删除</a>
+                                        <a href="javascript:Edit(@item.Id)" class="btn btn-primary">编辑</a></td>
+                                    </tr>
+                                  }
+                              }
+                    </tbody>
+                </table>
+            </div><! --/content-panel -->
+        </div><!-- /col-md-12 -->
+
+       
+    </div><!-- row -->
+
+
+</section><! --/wrapper -->
+<script type="text/javascript">
+    function del(id){
+        var result = window.confirm("是否删除");
+        if (result) {
+            location.href = "/admin/Shop/Del?id=" + id;
+        }
+    }
+    function Edit(id) {
+            location.href = "/admin/Shop/Edit?id=" + id;
+    }
+</script>
